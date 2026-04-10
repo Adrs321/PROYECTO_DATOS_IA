@@ -1,50 +1,94 @@
-# Predicción de Agotamiento de Stock en Retail
+# Predicción de Agotamiento de Stock en Productos
 
-Este proyecto tiene como objetivo desarrollar una solución técnica basada en Machine Learning que permita predecir con anticipación cuándo un producto se quedará sin stock. El sistema analiza patrones de demanda influenciados por la estacionalidad, promociones y tiempos de reposición para optimizar la toma de decisiones logísticas y reducir pérdidas económicas.
+Este proyecto tiene como objetivo anticipar, mediante un modelo de IA, si un producto en bodega se agotará en los próximos días, utilizando variables como historial de ventas, frecuencia de reposición y estacionalidad.
 
 ---
 
 ## Componentes del sistema
 
-- **Scripts de procesamiento**: módulos dedicados a la ingesta, limpieza y transformación de datos históricos.
-- **Base de datos PostgreSQL**: repositorio central para el almacenamiento del dataset analítico validado.
-- **Modelo de IA (scikit-learn)**: motor de clasificación binaria para estimar la probabilidad de quiebre de stock.
-- **Dashboard de visualización**: interfaz gráfica para la interpretación de resultados y métricas del modelo.
-- **Documentación**: incluye la planificación estratégica basada en PMBOK y el diseño técnico detallado.
+- **Scripts de procesamiento**: ingesta, limpieza, transformación y validación de datos.
+- **Base de datos PostgreSQL**: para la carga y consulta estructurada de los datasets.
+- **Modelo de IA (scikit-learn)**: clasificación binaria para predecir agotamiento.
+- **Metabase (opcional)**: dashboard de visualización de resultados.
+- **Documentación**: diseño técnico completo + planificación.
 
 ---
 
 ## Tecnologías utilizadas
 
-- **Lenguaje**: Python 3 (Pandas, Scikit-learn)
-- **Base de Datos**: PostgreSQL
-- **Control de Versiones**: Git / GitHub
-- **Metodología**: Enfoque de gestión de proyectos PMBOK
+- Python 3  
+- Pandas / Scikit-learn  
+- PostgreSQL  
+- Docker  
+- Git / GitHub  
+- Trello / Jira (planificación)
 
 ---
 
 ## Pipeline implementado
 
 | Etapa | Descripción |
-| :--- | :--- |
-| **1. Planificación** | Definición de alcance, cronograma y hitos técnicos. |
-| **2. Diseño Técnico** | Estructuración de componentes y modelo de datos. |
-| **3. Ingesta y Limpieza** | Procesamiento de datos de ventas y manejo de inconsistencias. |
-| **4. Carga en BD** | Migración del dataset limpio a tablas estructuradas en PostgreSQL. |
-| **5. Modelado IA** | Entrenamiento y evaluación del modelo predictivo. |
-| **6. Visualización** | Implementación del dashboard de resultados e insights. |
+|-------|-------------|
+| 1. Diseño e instalación | Estructura de carpetas, setup del entorno, definición de herramientas |
+| 2. Ingesta | Lectura desde CSV (Kaggle o Mockaroo), carga a memoria |
+| 3. Limpieza | Eliminación de duplicados, tratamiento de nulos, revisión de tipos |
+| 4. Transformación | Creación de variables como días sin reposición, tasa de ventas, etc. |
+| 5. Validación | Revisión de rangos, tipos, coherencia; validación básica |
+| 6. Carga en PostgreSQL | Subida del dataset limpio y validado a la base de datos local |
+| 7. Entrenamiento IA | Clasificación binaria con scikit-learn para variable `SeAgotara` |
+| 8. Evaluación | Métricas como accuracy, recall; revisión de logs de ejecución |
+| 9. Visualización | Panel con predicciones, stock proyectado y alertas (si aplica) |
 
 ---
 
 ## 📂 Estructura del repositorio
 
-```text
+```
 agotamiento-stock/
-├── README.md               # Resumen del proyecto y guía de uso
-├── docs/                   # Documento de planificación y diseño técnico
-├── scripts/                # Código fuente modular
-│   ├── ingesta.py          # Script de carga de datos inicial
-│   ├── limpieza.py         # Tratamiento de nulos y duplicados
-│   └── entrenamiento.py    # Generación del modelo predictivo
-├── data/                   # Dataset histórico (CSV)
-└── notebooks/              # Análisis exploratorio de datos (EDA)
+├── README.md
+├── docs/
+│   └── diseño_tecnico.pdf
+├── scripts/
+│   ├── ingesta.py
+│   ├── limpieza.py
+│   ├── transformacion.py
+│   └── entrenamiento.py
+├── data/
+│   └── productos_ventas.csv
+├── dashboards/
+│   └── dashboard_metabase.png
+├── docker-compose.yml
+```
+
+---
+
+## Cómo ejecutar el sistema (entorno ya instalado)
+
+1. Clonar el repositorio  
+   `git clone https://github.com/usuario/agotamiento-stock.git`
+
+2. Entrar a la carpeta del proyecto  
+   `cd agotamiento-stock`
+
+3. Ejecutar el pipeline manualmente por etapas  
+   Ejemplo:  
+   `python scripts/ingesta.py`  
+   `python scripts/limpieza.py`  
+   `python scripts/entrenamiento.py`
+
+4. Visualizar los resultados y métricas desde consola o dashboard
+
+---
+
+## Documentación técnica
+
+El documento de diseño técnico está disponible en:  
+[`docs/diseño_tecnico.pdf`](docs/diseño_tecnico.pdf)
+
+---
+
+## Equipo
+
+- Integrante 1 – Procesamiento y limpieza  
+- Integrante 2 – Modelado y entrenamiento  
+- Integrante 3 – Visualización y documentación
